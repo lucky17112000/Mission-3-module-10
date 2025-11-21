@@ -71,3 +71,29 @@ Node.js-এর Event Loop এভাবে কাজ করে:
 1️⃣ Synchronous code → লাইন বাই লাইন সাথে সাথে রান হয়
 2️⃣ Asynchronous কাজগুলো → background-এ পাঠানো হয়
 3️⃣ Background কাজ শেষ হলে callback → Event Loop-এর শেষ phase-এ execute হয়
+
+## path Module
+
+path module in Node.js — বিস্তারিত ব্যাখ্যা (বাংলায়)
+
+Node.js এর path module হলো একধরনের utility tool, যা ফাইল পাথ (file path) নিয়ে কাজ করতে সাহায্য করে। অর্থাৎ, বিভিন্ন অপারেটিং সিস্টেমে ফাইল বা ফোল্ডারের ঠিকানা (path) কে সহজে এবং সঠিকভাবে হ্যান্ডেল করতে path মডিউল ব্যবহৃত হয়।
+
+কেন path মডিউল ব্যবহার করা হয়?
+
+পাথ join করা: ফোল্ডার এবং ফাইলের নামগুলো একত্রে জোড়া লাগানো (join) করতে
+
+পাথ normalize করা: ভুল বা অপ্রয়োজনীয় slash দূর করে সঠিক ফরম্যাটে আনা
+
+অ্যাবসলিউট পাথ (Absolute path) বের করা: রিলেটিভ পাথ থেকে পূর্ণ path তৈরি করা
+
+ফাইল এক্সটেনশন বা নাম বের করা: যেমন .txt, .js ইত্যাদি
+
+ওএস নির্ভর ফরম্যাটিং: Windows (যেখানে \ হয়) আর Unix/Linux/Mac (যেখানে / হয়) এর পার্থক্য মাথায় রেখে path তৈরি করা
+| ফাংশন | কাজ | উদাহরণ |
+| -------------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `path.join([...paths])` | অনেক path অংশকে একসাথে যোগ করে, ঠিকঠাক ফাইল পাথ বানায় | `path.join('folder', 'file.txt')` → `'folder/file.txt'` (Linux) |
+| `path.resolve([...paths])` | একাধিক পাথকে অ্যাবসলিউট পাথে রূপান্তর করে | `path.resolve('folder', 'file.txt')` → `'/Users/me/project/folder/file.txt'` |
+| `path.basename(path)` | পাথ থেকে ফাইলের নাম বের করে | `path.basename('/foo/bar/baz.txt')` → `'baz.txt'` |
+| `path.dirname(path)` | পাথ থেকে ফাইল ছাড়া ডিরেক্টরির অংশ বের করে | `path.dirname('/foo/bar/baz.txt')` → `'/foo/bar'` |
+| `path.extname(path)` | ফাইলের এক্সটেনশন (যেমন `.js`, `.txt`) বের করে | `path.extname('index.html')` → `'.html'` |
+| `path.normalize(path)` | path কে normalize করে (অপ্রয়োজনীয় `../` বা `./` ঠিক করে) | `path.normalize('/foo/bar//baz/asdf/quux/..')` → `/foo/bar/baz/asdf` |
