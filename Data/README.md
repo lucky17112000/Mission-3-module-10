@@ -19,3 +19,55 @@ Node.js-এ সেই একই কাজ code দিয়ে করা যায় 
 
 ➡️ এটি আপনাকে current file যেই folder-এ আছে তার absolute path দেখায়।
 path.join() automatic ভাবে OS অনুযায়ী সঠিক path বানায়।
+
+```ts
+const fs = require("fs");
+const path = require("path");
+console.log("start reading");
+
+fs.readFile(
+  path.join(__dirname, "../entries/dairy.txt"),
+  "utf-8",
+  (error, data) => {
+    if (error) {
+      console.error("Error happend", error.message);
+    } else {
+      console.log(data);
+    }
+  }
+);
+
+console.log("immidiate block");
+```
+
+এটা বোঝার জন্য তোমাকে Node.js-এর মূল architecture বুঝতে হবে —
+বিশেষ করে Non-Blocking I/O এবং Event Loop।
+
+এখন একদম সহজ বাংলায় ব্যাখ্যা করি কেন👇
+"immediate block" → আগে প্রিন্ট হয়
+fs.readFile() → পরে প্রিন্ট হয়
+
+এখানে fs.readFile() — asynchronous, মানে:
+
+Node.js file পড়ার কাজটা background thread pool এ পাঠিয়ে দেয়
+
+এবং সাথে সাথেই পরের কোডে চলে যায়
+
+📌 তাই console.log("immidiate block") → আগে execute হয়।
+
+🔥 সহজ করে বললে:
+
+তুমি Node.js কে বললে:
+
+"ভাই, এই ফাইলটা পড়ে দাও… কিন্তু তুমি পড়ে শেষ না করা পর্যন্ত আমি বসে থাকবো না।
+তুমি পড়ো… আমি meantime-এ অন্য কাজ করে ফেলি।
+পড়া শেষ হলে আমাকে callback দিয়ে জানিও।"
+
+এই কারণেই asynchronous call-এর নিচের লাইন আগে চলতে থাকে।
+🧠 Node.js Execution Order:
+
+Node.js-এর Event Loop এভাবে কাজ করে:
+
+1️⃣ Synchronous code → লাইন বাই লাইন সাথে সাথে রান হয়
+2️⃣ Asynchronous কাজগুলো → background-এ পাঠানো হয়
+3️⃣ Background কাজ শেষ হলে callback → Event Loop-এর শেষ phase-এ execute হয়
