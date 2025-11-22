@@ -80,14 +80,14 @@ function organizedFile() {
 
   files.forEach((file) => {
     // console.log(file);
-    const merge = file; //under base file name like -->asd.jpeg, dfg.zip
+    const merge = file; //under base file name for example -->asd.jpeg, dfg.zip
     const sourcepath = path.join(sourceDir, file);
     const stat = fs.statSync(sourcepath);
     if (stat.isDirectory()) {
       return;
     }
 
-    const cate = extensionCatagory[path.extname(file)] || "others"; //from lookup table second folder ->>audio , code , images , other and  accessing by  0(1) instead 0(N*C*E) that means 0(n^3)
+    const cate = extensionCatagory[path.extname(file)] || "others"; //from lookup table second folder ->>audio , code , images , other and  accessing by  0(1) instead 0(N*C*E) or 0(n^3)
     const destDir = path.join(organizedDir, cate, merge);
     // const destpath = path.join(destDir, merge);
 
