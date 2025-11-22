@@ -1,4 +1,4 @@
-✅ FS Module কী? (বাংলায় ব্যাখ্যা)
+## <span style="color:red">Fs module:</span>
 
 fs মানে হলো File System।
 Node.js-এ ফাইল তৈরি করা, পড়া, আপডেট করা, ডিলিট করা—সবকিছুই fs module দিয়ে করা হয়।
@@ -72,7 +72,7 @@ Node.js-এর Event Loop এভাবে কাজ করে:
 2️⃣ Asynchronous কাজগুলো → background-এ পাঠানো হয়
 3️⃣ Background কাজ শেষ হলে callback → Event Loop-এর শেষ phase-এ execute হয়
 
-## path Module
+## <span style="color:red">Path module:</span>
 
 path module in Node.js — বিস্তারিত ব্যাখ্যা (বাংলায়)
 
@@ -98,7 +98,7 @@ Node.js এর path module হলো একধরনের utility tool, যা 
 | `path.extname(path)` | ফাইলের এক্সটেনশন (যেমন `.js`, `.txt`) বের করে | `path.extname('index.html')` → `'.html'` |
 | `path.normalize(path)` | path কে normalize করে (অপ্রয়োজনীয় `../` বা `./` ঠিক করে) | `path.normalize('/foo/bar//baz/asdf/quux/..')` → `/foo/bar/baz/asdf` |
 
-### os module
+## <span style="color:red">os module:</span>
 
 OS module হলো Node.js এর একটা built-in মডিউল যা Operating System (OS) সম্পর্কে বিভিন্ন তথ্য (information) জানতে এবং OS-এর বিভিন্ন কাজ করতে দেয়। অর্থাৎ, OS module ব্যবহার করে আপনি আপনার কম্পিউটারের OS সম্পর্কিত data যেমন memory, CPU info, network interface, user info ইত্যাদি পেতে পারেন।
 
@@ -116,3 +116,60 @@ os module হলো Node.js এর একটা টুলকিট যা আপ
 | `os.uptime()` | OS কতক্ষণ চালু আছে (সেকেন্ডে) |
 | `os.hostname()` | কম্পিউটারের hostname |
 | `os.userInfo()` | লগইন করা ইউজারের তথ্য |
+
+## <span style="color:red">crypto module:</span>
+
+crypto module হলো Node.js এর built-in module যা cryptography বা গোপনীয়তা রক্ষা করার জন্য ব্যবহার হয়।
+
+এর মাধ্যমে আপনি ডেটা এনক্রিপ্ট (encrypt) এবং ডিক্রিপ্ট (decrypt) করতে পারেন, হ্যাশ (hash) তৈরি করতে পারেন, ডিজিটাল সিগনেচার তৈরি ও যাচাই করতে পারেন ইত্যাদি।
+
+সাধারণত, যখন ডেটা সিকিউর করতে হয় (যেমন পাসওয়ার্ড সুরক্ষিত রাখা, ডেটা এনক্রিপশন করা, সিকিউর কমিউনিকেশন ইত্যাদি), তখন crypto module ব্যবহার করা হয়।
+
+crypto module এর প্রধান কাজগুলো:
+
+Hashing (হ্যাশিং):
+
+ডেটার এক ধরনের ফিঙ্গারপ্রিন্ট তৈরি করে, যা মূল ডেটা থেকে আলাদা কিন্তু ইউনিক।
+
+যেমন, পাসওয়ার্ড সংরক্ষণের জন্য সাধারণত হ্যাশ ব্যবহার হয় (যেমন SHA256, SHA512)।
+
+<span style="color:green">একবার হ্যাশ করা হলে, একই ইনপুটে সব সময় একই হ্যাশ পাওয়া যায়।</span>
+
+Encryption & Decryption (এনক্রিপশন ও ডিক্রিপশন):
+
+ডেটাকে এমনভাবে রূপান্তর করা যা অন্য কেউ সহজে বুঝতে না পারে।
+
+এনক্রিপ্ট করা ডেটাকে পরে ডিক্রিপ্ট করে আবার মূল ডেটায় রূপান্তর করা যায়।
+
+Digital Signatures (ডিজিটাল সিগনেচার):
+
+ডেটার প্রামাণিকতা নিশ্চিত করে।
+
+যিনি সিগনেচার দিয়েছেন তিনি আসলেই সেই ব্যক্তিই কিনা তা যাচাই করে।
+
+Key Generation (কি তৈরি):
+
+এনক্রিপশন ও ডিক্রিপশনের জন্য প্রয়োজনীয় keys তৈরি করে।
+
+```ts
+const crypto = require("crypto");
+
+const message = "Hello World";
+
+// SHA256 হ্যাশ তৈরি
+const hash = crypto.createHash("sha256").update(message).digest("hex");
+
+console.log(hash);
+```
+
+createHash('sha256') — SHA256 এলগরিদম ব্যবহার করে হ্যাশ অবজেক্ট তৈরি।
+
+update(message) — মেসেজ হ্যাশ করার জন্য যোগ করা।
+
+digest('hex') — হ্যাশকে hex string এ রূপান্তর।
+
+| বিষয়             | ব্যাখ্যা                                                  |
+| ---------------- | --------------------------------------------------------- |
+| crypto module    | Node.js এর cryptography toolset                           |
+| কাজ              | হ্যাশিং, এনক্রিপশন, ডিজিটাল সিগনেচার, কী জেনারেশন ইত্যাদি |
+| ব্যবহারের উদাহরণ | পাসওয়ার্ড সুরক্ষা, ডেটা এনক্রিপশন, নিরাপদ যোগাযোগ         |
