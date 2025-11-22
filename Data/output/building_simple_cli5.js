@@ -54,14 +54,17 @@ function initializeDirectories() {
   });
 }
 
-// function getcategory
+//lok up table for optimization
 
 const extensionCatagory = {};
-for (const cataagory in categories) {
-  categories[cataagory].forEach((ext) => {
-    extensionCatagory[ext] = cataagory;
-  });
+function makeLookUp() {
+  for (const cataagory in categories) {
+    categories[cataagory].forEach((ext) => {
+      extensionCatagory[ext] = cataagory;
+    });
+  }
 }
+makeLookUp();
 
 function organizedFile() {
   const files = fs.readdirSync(sourceDir);
@@ -84,7 +87,7 @@ function organizedFile() {
       return;
     }
 
-    const cate = extensionCatagory[path.extname(file)] || "others"; //from lookup table second folder ->>audio , code , images , other and  0(1)
+    const cate = extensionCatagory[path.extname(file)] || "others"; //from lookup table second folder ->>audio , code , images , other and  accessing by  0(1) instead 0(N*C*E) that means 0(n^3)
     const destDir = path.join(organizedDir, cate, merge);
     // const destpath = path.join(destDir, merge);
 
