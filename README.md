@@ -97,3 +97,22 @@ Node.js এর path module হলো একধরনের utility tool, যা 
 | `path.dirname(path)` | পাথ থেকে ফাইল ছাড়া ডিরেক্টরির অংশ বের করে | `path.dirname('/foo/bar/baz.txt')` → `'/foo/bar'` |
 | `path.extname(path)` | ফাইলের এক্সটেনশন (যেমন `.js`, `.txt`) বের করে | `path.extname('index.html')` → `'.html'` |
 | `path.normalize(path)` | path কে normalize করে (অপ্রয়োজনীয় `../` বা `./` ঠিক করে) | `path.normalize('/foo/bar//baz/asdf/quux/..')` → `/foo/bar/baz/asdf` |
+
+### os module
+
+OS module হলো Node.js এর একটা built-in মডিউল যা Operating System (OS) সম্পর্কে বিভিন্ন তথ্য (information) জানতে এবং OS-এর বিভিন্ন কাজ করতে দেয়। অর্থাৎ, OS module ব্যবহার করে আপনি আপনার কম্পিউটারের OS সম্পর্কিত data যেমন memory, CPU info, network interface, user info ইত্যাদি পেতে পারেন।
+
+সহজ বাংলায়:
+
+os module হলো Node.js এর একটা টুলকিট যা আপনাকে আপনার কম্পিউটারের অপারেটিং সিস্টেমের বিভিন্ন তথ্য জানতে এবং কাজে লাগাতে সাহায্য করে।
+| ফাংশন/প্রপার্টি | কাজ/ব্যাখ্যা |
+| --------------- | --------------------------------------------------------- |
+| `os.platform()` | OS এর প্ল্যাটফর্ম (যেমন: 'win32', 'linux', 'darwin') দেয় |
+| `os.type()` | OS এর নাম (যেমন: 'Windows_NT', 'Linux') |
+| `os.arch()` | CPU architecture (যেমন: 'x64', 'arm') |
+| `os.cpus()` | CPU গুলো সম্পর্কে বিস্তারিত তথ্য দেয় |
+| `os.freemem()` | RAM এর ফাঁকা অংশের (free memory) পরিমাণ |
+| `os.totalmem()` | মোট RAM এর পরিমাণ |
+| `os.uptime()` | OS কতক্ষণ চালু আছে (সেকেন্ডে) |
+| `os.hostname()` | কম্পিউটারের hostname |
+| `os.userInfo()` | লগইন করা ইউজারের তথ্য |
